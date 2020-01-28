@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Container, Jumbotron, CarouselIndicators } from 'reactstrap'
+import cuid from 'cuid'
 import { axiosWithAuth } from '../tools/axiosWithAuth'
 
 import Friend from './Friend'
@@ -17,10 +19,27 @@ const Friends = props => {
             .catch(err => console.log(err))
     }
 
-    return (
-        <div>
+    const deleteFriend = id => {
+        axiosWithAuth()
+            .delete(`/api/friends/${id}`)
+            .then(getData())
+    }
 
-        </div>
+    const editFriend = values => {
+        axiosWithAuth()
+            .put(`/api/friends/${values.id}`, values)
+            .then(getData())
+    }
+
+    return (
+        <Container>
+            <div className='spacer'></div>
+            <Jumbotron>
+                { friends.map(friend => 
+                    <Friend friend={ friend } deleteFriend={ deleteFriend } editFriend={ editFriend } key={ cuid() } />
+                )}
+            </Jumbotron>
+        </Container>
     )
 }
 

@@ -14,7 +14,7 @@ function App() {
       <Navigation />
       <Switch>
         <PrivateRoute path='/friends' component={ Friends } />
-        <PrivateRoute path='/add' component={ AddFriend } />
+        <PrivateRoute path='/addfriend' component={ AddFriend } />
         <Route path='/login' component={ Login } />
         <Route component={ Login } />
       </Switch>
